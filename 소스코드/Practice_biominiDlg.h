@@ -51,11 +51,12 @@ public:
 	unsigned char* m_TemplateCompare[MAX_TEMPLATE_NUM];
 	unsigned char* m_TemplateOpened[MAX_TEMPLATE_NUM];
 	unsigned char* m_TempTest[MAX_TEMPLATE_NUM];
+	unsigned char* m_extractArr1[MAX_TEMPLATE_NUM];
 	unsigned char* m_TestTemplate;
 	CString m_selectArr1[5000] = { 0, };
 	CString m_selectArr2[5000] = { 0, };
 	int nEnrollQuality;
-
+	int m_nResoltuion;
 	CString m_fileNameArr1;
 	CString m_fileNameArr2;
 
@@ -63,11 +64,16 @@ public:
 	CString m_userArr1[5000];
 	CString m_fingerArr1[5000];
 	CString m_conditionArr1[5000];
+	CString m_numArr1[5000];
+	CString m_deviceArr1[5000];
+
 
 	CString m_yearArr2[5000];
 	CString m_userArr2[5000];
 	CString m_fingerArr2[5000];
 	CString m_conditionArr2[5000];
+	CString m_numArr2[5000];
+	CString m_deviceArr2[5000];
 
 	int m_TempCompareSize[MAX_TEMPLATE_NUM];
 	int m_TemplateSize[MAX_TEMPLATE_NUM];
@@ -75,6 +81,7 @@ public:
 	int m_TempTestSize[MAX_TEMPLATE_NUM];
 	int m_selectArr1Size[MAX_TEMPLATE_NUM];
 	int m_selectArr2Size[MAX_TEMPLATE_NUM];
+	int m_extractArr1Size[MAX_TEMPLATE_NUM];
 	int m_Template_num;
 	int m_TempCompare_num;
 	int m_TempOpened_num;
@@ -86,11 +93,14 @@ public:
 	HUFMatcher m_hMatcher = NULL;
 	bool m_fileOn;
 	unsigned char* m_pImage_1;
+	unsigned char* m_pImage_2;
 	int m_nWidth_1;
 	int m_nHeight_1;
+	int m_nWidth_2;
+	int m_nHeight_2;
 	CString m_SelectedFolder;
 	UFS_STATUS ufs_res;
-	HUFScanner hScanner= NULL; //Ω∫ƒ≥≥ ø° ¥Î«— «⁄µÈ
+	HUFScanner hScanner= NULL; //Ïä§Ï∫êÎÑàÏóê ÎåÄÌïú Ìï∏Îì§
 	CStatic mImage_control;
 	CString m_szFilename_1;
 	CString m_selectList;
@@ -111,4 +121,5 @@ public:
 	afx_msg void OnBnClickedselectfile1();
 	afx_msg void OnBnClickedselectfile2();
 	afx_msg void OnBnClickedselection();
+	afx_msg void OnBnClickedButton2();
 };
