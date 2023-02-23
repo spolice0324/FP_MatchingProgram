@@ -92,6 +92,7 @@ BEGIN_MESSAGE_MAP(CPractice_biominiDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_selectFile1, &CPractice_biominiDlg::OnBnClickedselectfile1)
 	ON_BN_CLICKED(IDC_selectFile2, &CPractice_biominiDlg::OnBnClickedselectfile2)
 	ON_BN_CLICKED(IDC_selection, &CPractice_biominiDlg::OnBnClickedselection)
+	ON_BN_CLICKED(IDC_BUTTON2, &CPractice_biominiDlg::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 // CPractice_biominiDlg message handlers
@@ -196,15 +197,15 @@ void CPractice_biominiDlg::OnBnClickedInitbutton()
 	ufs_res = UFS_Init();
 	EndWaitCursor();
 	if (ufs_res == UFS_OK) {
-		OnEnChangeEdit1("±â±â Init¿¡ ¼º°øÇÏ¿´½À´Ï´Ù.\r\n");
+		OnEnChangeEdit1("ê¸°ê¸° Initì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤.\r\n");
 	}
 	ufm_res = UFM_Create(&m_hMatcher);
 }
 
 void CPractice_biominiDlg::OnBnClickedGetscannerhandle()
 {
-	UFS_STATUS ufs_resHandle; //½ºÄ³³Ê ÀÎµ¦½º (0 ~ ½ºÄ³³Ê °³¼ö -1)
-	UFS_STATUS ufs_resHandleNum; //½ºÄ³³Ê ¿ÀºêÁ§Æ® ÇÚµé¿¡ ´ëÇÑ Æ÷ÀÎÅÍ
+	UFS_STATUS ufs_resHandle; //ìŠ¤ìºë„ˆ ì¸ë±ìŠ¤ (0 ~ ìŠ¤ìºë„ˆ ê°œìˆ˜ -1)
+	UFS_STATUS ufs_resHandleNum; //ìŠ¤ìºë„ˆ ì˜¤ë¸Œì íŠ¸ í•¸ë“¤ì— ëŒ€í•œ í¬ì¸í„°
 
 	int i;
 	int nScannerNumber;
@@ -216,11 +217,11 @@ void CPractice_biominiDlg::OnBnClickedGetscannerhandle()
 		}
 	}
 	else {
-		OnEnChangeEdit1("½ºÄ³³Ê ÇÚµé °¡Á®¿À±â¿¡ ½ÇÆĞÇß½À´Ï´Ù. ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù.\r\n");
+		OnEnChangeEdit1("ìŠ¤ìºë„ˆ í•¸ë“¤ ê°€ì ¸ì˜¤ê¸°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.\r\n");
 		return;
 	}
 
-	OnEnChangeEdit1("½ºÄ³³Ê ÇÚµé °¡Á®¿À±â¿¡ ¼º°øÇß½À´Ï´Ù.\r\n");
+	OnEnChangeEdit1("ìŠ¤ìºë„ˆ í•¸ë“¤ ê°€ì ¸ì˜¤ê¸°ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.\r\n");
 	Invalidate(TRUE);
 }
 
@@ -267,9 +268,9 @@ void CPractice_biominiDlg::OnBnClickedExtract()
 	UFS_STATUS ufs_res;
 
 	ufs_res = UFS_ExtractEx(hScanner, MAX_TEMPLATE_SIZE, m_Template[m_Template_num], &m_TemplateSize[m_Template_num], &nEnrollQuality);
-	OnEnChangeEdit1("Áö¹® ÃßÃâ ¼º°ø\r\n");
+	OnEnChangeEdit1("ì§€ë¬¸ ì¶”ì¶œ ì„±ê³µ\r\n");
 
-	//EXTRACT °úÁ¤
+	//EXTRACT ê³¼ì •
 	
 	
 }
@@ -300,16 +301,16 @@ void CPractice_biominiDlg::OnBnClickedVerify()
 		m_TempCompare_num++;
 		if (bVerifySucceed)
 		{
-			OnEnChangeEdit1("verify ¼º°ø! ÇØ´ç Áö¹®°ú ÀÏÄ¡ÇÕ´Ï´Ù.\r\n");
+			OnEnChangeEdit1("verify ì„±ê³µ! í•´ë‹¹ ì§€ë¬¸ê³¼ ì¼ì¹˜í•©ë‹ˆë‹¤.\r\n");
 
 		}
 		else
 		{
-			OnEnChangeEdit1("verify ½ÇÆĞ!\r\n ");
+			OnEnChangeEdit1("verify ì‹¤íŒ¨!\r\n ");
 		}
 	}
 	else {
-		OnEnChangeEdit1("verifyÇÒ »õ·Î¿î Áö¹®ÀÌ Ä¸Ã³µÇÁö ¾Ê¾Ò½À´Ï´Ù.\r\n");
+		OnEnChangeEdit1("verifyí•  ìƒˆë¡œìš´ ì§€ë¬¸ì´ ìº¡ì²˜ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\r\n");
 		return;
 	}
 
@@ -336,9 +337,9 @@ void CPractice_biominiDlg::OnBnClickedOpentemplate() {
 	UFM_STATUS ufm_res;
 	UFE_STATUS ufe_res;
 
-	//Àı´ë°æ·Î³» ÆÄÀÏµéÀÇ ÀÌ¸§ , ÆÄÀÏ ÀÚÃ¼¸¦ °¡Á®¿À±â 
-	CString tpath = _T("C:\\Users\\User\\Documents\\Visual Studio 2015\\Projects\\1\\*.bin");
-	CString tpath2 = _T("C:\\Users\\User\\Documents\\Visual Studio 2015\\Projects\\1\\");
+	//ì ˆëŒ€ê²½ë¡œë‚´ íŒŒì¼ë“¤ì˜ ì´ë¦„ , íŒŒì¼ ìì²´ë¥¼ ê°€ì ¸ì˜¤ê¸° 
+	CString tpath = _T("C:\\1Copy\\*.bin");
+	CString tpath2 = _T("C:\\1Copy");
 	CFileFind finder;
 	BOOL bWorking = finder.FindFile(tpath);
 	CString csTemp;
@@ -348,7 +349,7 @@ void CPractice_biominiDlg::OnBnClickedOpentemplate() {
 		m_TempTestSize[i] = 0;
 	}
 	
-	char fileName[128];
+	char fileName[500];
 	int file_num = 0;
 
 	while (bWorking) {
@@ -356,17 +357,17 @@ void CPractice_biominiDlg::OnBnClickedOpentemplate() {
 		if (finder.IsArchived()) {
 			file_num++;
 			CString _fileName = finder.GetFileName();
-			csTemp = tpath2 + _fileName;
+			csTemp = tpath2 + (_T("\\")) + _fileName;
 			int length = csTemp.GetLength();
-			sprintf_s(fileName, 128, "%S", csTemp);
+			sprintf_s(fileName, 500, "%S", csTemp);
 			FILE* file;
 			file = fopen(fileName, "rb");
 
-			OnEnChangeEdit1("ÆÄÀÏ ÀÌ¸§ ÀĞ¾î¿À±â ¼º°ø\r\n");
+			OnEnChangeEdit1("íŒŒì¼ ì´ë¦„ ì½ì–´ì˜¤ê¸° ì„±ê³µ\r\n");
 
 			if (file == NULL)
 			{
-				OnEnChangeEdit1("ÆÄÀÏ ¿ÀÇÂ ¿¡·¯\n");
+				OnEnChangeEdit1("íŒŒì¼ ì˜¤í”ˆ ì—ëŸ¬\n");
 			}
 			fseek(file, 0L, SEEK_END);
 			m_TempTestSize[file_num - 1] = ftell(file);
@@ -382,8 +383,8 @@ void CPractice_biominiDlg::OnBnClickedOpentemplate() {
 	}
 }
 	
-//±× ÆÄÀÏÀÇ µ¥ÀÌÅÍµéÀ» fopen ÇÏ¿© 
-// ÀĞ¾î¿Â ÆÄÀÏµéÀÇ µ¥ÀÌÅÍ¸¦ ¹è¿­¾È¿¡ ¾²±â				
+//ê·¸ íŒŒì¼ì˜ ë°ì´í„°ë“¤ì„ fopen í•˜ì—¬ 
+// ì½ì–´ì˜¨ íŒŒì¼ë“¤ì˜ ë°ì´í„°ë¥¼ ë°°ì—´ì•ˆì— ì“°ê¸°				
 
 void CPractice_biominiDlg::OnBnClickedOpenfile2()
 {
@@ -391,9 +392,9 @@ void CPractice_biominiDlg::OnBnClickedOpenfile2()
 	UFM_STATUS ufm_res;
 	UFE_STATUS ufe_res;
 
-	//Àı´ë°æ·Î³» ÆÄÀÏµéÀÇ ÀÌ¸§ , ÆÄÀÏ ÀÚÃ¼¸¦ °¡Á®¿À±â 
-	CString tpath = _T("C:\\Users\\User\\Documents\\Visual Studio 2015\\Projects\\2\\*.bin");
-	CString tpath2 = _T("C:\\Users\\User\\Documents\\Visual Studio 2015\\Projects\\2\\");
+	//ì ˆëŒ€ê²½ë¡œë‚´ íŒŒì¼ë“¤ì˜ ì´ë¦„ , íŒŒì¼ ìì²´ë¥¼ ê°€ì ¸ì˜¤ê¸° 
+	CString tpath = _T("C:\\1Copy\\*.bin");
+	CString tpath2 = _T("C:\\1Copy");
 	CFileFind finder;
 	BOOL bWorking = finder.FindFile(tpath);
 	CString csTemp;
@@ -411,17 +412,17 @@ void CPractice_biominiDlg::OnBnClickedOpenfile2()
 		if (finder.IsArchived()) {
 			file_num++;
 			CString _fileName = finder.GetFileName();
-			csTemp = tpath2 + _fileName;
+			csTemp = tpath2 + (_T("\\")) + _fileName;
 			int length = csTemp.GetLength();
 			sprintf_s(fileName, 128, "%S", csTemp);
 			FILE* file;
 			file = fopen(fileName, "rb");
 
-			OnEnChangeEdit1("ÆÄÀÏ ÀÌ¸§ ÀĞ¾î¿À±â ¼º°ø\r\n");
+			OnEnChangeEdit1("íŒŒì¼ ì´ë¦„ ì½ì–´ì˜¤ê¸° ì„±ê³µ\r\n");
 
 			if (file == NULL)
 			{
-				OnEnChangeEdit1("ÆÄÀÏ ¿ÀÇÂ ¿¡·¯\n");
+				OnEnChangeEdit1("íŒŒì¼ ì˜¤í”ˆ ì—ëŸ¬\n");
 			}
 			fseek(file, 0L, SEEK_END);
 			m_TempOpenedSize[file_num - 1] = ftell(file);
@@ -458,7 +459,7 @@ void CPractice_biominiDlg::OnBnClickedMatchfile()
 		OnEnChangeEdit1("UFM_Create: OK\r\n");
 	}
 	UFM_SetParameter(hMatcher, UFM_PARAM_SECURITY_LEVEL, &nValue);
-	// °¢°¢ open1 , open2 -> ±×¸®°í ¸ÅÄ¡¸¦ ´©¸£¸é ºñ±³ÇÑ µÎ°³¸¦ VERIFY
+	// ê°ê° open1 , open2 -> ê·¸ë¦¬ê³  ë§¤ì¹˜ë¥¼ ëˆ„ë¥´ë©´ ë¹„êµí•œ ë‘ê°œë¥¼ VERIFY
 	ufm_res = UFM_VerifyEx(hMatcher, m_TempTest[0], m_TempTestSize[0], m_TemplateOpened[0], m_TempOpenedSize[0], &fscore, &bVerifySucceed);
 
 	if (bVerifySucceed) {
@@ -478,7 +479,7 @@ void CPractice_biominiDlg::OnBnClickedMatchfile()
 }
 
 
-//UFE_LoadImageFromBMPFile(ÆÄÀÏ¸í, RAWÀÌ¹ÌÁö ¹ÙÀÌ³Ê¸®, ³ĞÀÌ, ³ôÀÌ)
+//UFE_LoadImageFromBMPFile(íŒŒì¼ëª…, RAWì´ë¯¸ì§€ ë°”ì´ë„ˆë¦¬, ë„“ì´, ë†’ì´)
 
 void CPractice_biominiDlg::OnBnClickedimageload()
 {
@@ -504,7 +505,7 @@ void CPractice_biominiDlg::OnBnClickedimageload()
 	int lfdScore2 = 3;
 	UFS_SetParameter(hScanner, UFS_PARAM_DETECT_FAKE, &lfdScore2);
 	ufe_res = UFE_LoadImageFromBMPFile(cTest, m_pImage_1, &m_nWidth_1, &m_nHeight_1);
-	//UFS_GetLFDScore(hScanner, RAWÀÌ¹ÌÁö ¹ÙÀÌ³Ê¸®, ³ĞÀÌ, ³ôÀÌ, ½ºÄÚ¾î);
+	//UFS_GetLFDScore(hScanner, RAWì´ë¯¸ì§€ ë°”ì´ë„ˆë¦¬, ë„“ì´, ë†’ì´, ìŠ¤ì½”ì–´);
 	ufs_res = UFS_GetLFDScore(hScanner, m_pImage_1, m_nWidth_1, m_nHeight_1, &lfdScore);
 	if (ufe_res == UFE_OK) {
 			OnEnChangeEdit1("UFE_LoadImageFromBMPFile from: OK\r\n");
@@ -521,17 +522,103 @@ void CPractice_biominiDlg::OnBnClickedimageload()
 
 
 
+void CPractice_biominiDlg::OnBnClickedButton2()
+{
+	m_pImage_2 = (unsigned char*)malloc(MAX_IMAGE_WIDTH * MAX_IMAGE_HEIGHT);
+	m_fileOn = false;
+	HUFExtractor hExtractor = NULL;
+	HUFMatcher hMatcher = NULL;
+	UFE_STATUS ufe_res;
+	UFM_STATUS ufm_res;
+	
+	int bVerifySucceed;
+	float fscore = 0;
+	ufe_res = UFE_Create(&hExtractor);
+	if (ufe_res == UFE_OK) {
+		OnEnChangeEdit1("UFE_CREATE: OK\r\n");
+	}
+	
+	CString csstrPath;
+	CString csstrPath2;
+	BROWSEINFO BrInfo;
+	TCHAR szBuffer[512];
+	::ZeroMemory(&BrInfo, sizeof(BROWSEINFO));
+	::ZeroMemory(szBuffer, 512);
+	BrInfo.hwndOwner = GetSafeHwnd();
+	BrInfo.lpszTitle = _T("íŒŒì¼ì´ ì €ì¥ë  í´ë”ë¥¼ ì„ íƒí•˜ì„¸ìš”");
+	BrInfo.ulFlags = BIF_NEWDIALOGSTYLE | BIF_EDITBOX | BIF_RETURNONLYFSDIRS;
+	LPITEMIDLIST pItemIdList = ::SHBrowseForFolder(&BrInfo);
+	::SHGetPathFromIDList(pItemIdList, szBuffer);
+	csstrPath.Format(_T("%s"), szBuffer);
+
+	csstrPath2 = csstrPath + (_T("\\*.*"));
+	CFileFind finder;
+	BOOL bWorking = finder.FindFile(csstrPath2);
+	CString csTemp;
+
+	
+	int i;
+	for (i = 0; i < MAX_TEMPLATE_NUM; i++) {
+		m_TemplateOpened[i] = (unsigned char*)malloc(MAX_TEMPLATE_SIZE);
+		memset(m_TemplateOpened[i], 0, MAX_TEMPLATE_SIZE);
+		
+		m_TempOpenedSize[i] = 0;
+	}
+	m_TempOpened_num = 0;
+
+	char fileName[128];
+	int file_num = 0;
+	int lfdScore2 = 3;
+
+	while (bWorking) {
+		bWorking = finder.FindNextFile();
+		if (finder.IsArchived()) {
+			file_num++;
+			CString _fileName = finder.GetFileName();
+			CString csTemp = csstrPath + (_T("\\"))+_fileName;
+
+			sprintf_s(fileName, 128, "%S", csTemp);
+			CStringA fileName = (CStringA)csTemp;
+
+			CString _fileTitle = finder.GetFileTitle();
+			CString csTemp1 = csstrPath + (_T("\\")) + _fileTitle + (_T(".bin"));
+
+			CStringA csTemp2 = (CStringA)csTemp1;
+			char szFileName3[400] = { 0, };
+			memcpy(szFileName3, (LPSTR)(LPCSTR)csTemp2, csTemp2.GetLength());
+			const char* cfile = fileName.GetBuffer();
+
+			ufe_res = UFE_LoadImageFromBMPFile(cfile, m_pImage_2, &m_nWidth_2, &m_nHeight_2);
+			ufe_res = UFE_Extract(hExtractor, m_pImage_2, m_nWidth_2, m_nHeight_2, 500, m_TemplateOpened[m_TempOpened_num], m_TempOpenedSize, &nEnrollQuality);
+			
+			FILE* file;
+			OnEnChangeEdit1("íŒŒì¼ ì´ë¦„ ì½ì–´ì˜¤ê¸° ì„±ê³µ\r\n");
+
+
+			file = fopen(szFileName3, "wb");
+			if (file == NULL) {
+				return;
+			}
+			fwrite(m_TemplateOpened[m_TempOpened_num], 1, m_TempOpenedSize[m_TempOpened_num], file);
+			fclose(file);
+
+			OnEnChangeEdit1("Saved\r\n");
+				}
+
+	}
+}
+
 void CPractice_biominiDlg::OnBnClickedselectfile1()
 {
-	//file dialog ´ÙÁß ¼¿·º
-	// ´ÙÁß ¼¿·º -> ¹è¿­¿¡ ÆÄÀÏ ¾²±â
+	//file dialog ë‹¤ì¤‘ ì…€ë ‰
+	// ë‹¤ì¤‘ ì…€ë ‰ -> ë°°ì—´ì— íŒŒì¼ ì“°ê¸°
 
 	HUFExtractor hExtractor = NULL;
 	HUFMatcher hMatcher = NULL;
 	UFE_STATUS ufe_res;
 	ufe_res = UFE_Create(&hExtractor);
-	CString tpath = _T("C:\\Users\\User\\Documents\\Visual Studio 2015\\Projects\\1\\*.bin");
-	CString tpath2 = _T("C:\\Users\\User\\Documents\\Visual Studio 2015\\Projects\\1");
+	CString tpath = _T("C:\\1Copy\\*.bin");
+	CString tpath2 = _T("C:\\1Copy");
 	CFileFind finder;
 	BOOL bWorking = finder.FindFile(tpath);
 	CString csTemp;
@@ -556,16 +643,22 @@ void CPractice_biominiDlg::OnBnClickedselectfile1()
 			csTemp = tpath2 + _fileName;
 					}
 		m_selectArr1[m_file_num1 - 1] = _fileName;
-		CString str = _fileName; //ÆÄ½ÌÇÒ ¹®ÀÚ¿­
-		CString strA, strB, strC, strD; //ÆÄ½ÌµÇ´Â ¹®ÀÚ¿­À» ´ãÀ» º¯¼ö¼±¾ğ
+		CString str = _fileName; //íŒŒì‹±í•  ë¬¸ìì—´
+		CString strA, strB, strC, strD, strE, strF, strG; //íŒŒì‹±ë˜ëŠ” ë¬¸ìì—´ì„ ë‹´ì„ ë³€ìˆ˜ì„ ì–¸
 		AfxExtractSubString(strA, str, 0, '_');
 		AfxExtractSubString(strB, str, 1, '_');
 		AfxExtractSubString(strC, str, 2, '_');
 		AfxExtractSubString(strD, str, 3, '_');
+		AfxExtractSubString(strE, str, 4, '_');
+		AfxExtractSubString(strF, str, 5, '_');
+		AfxExtractSubString(strG, str, 6, '.');
 			m_yearArr1[m_file_num1-1] = strA;
-			m_userArr1[m_file_num1-1] = strB;
-			m_fingerArr1[m_file_num1-1] = strC;
-			m_conditionArr1[m_file_num1-1] = strD;
+			m_deviceArr1[m_file_num1 - 1] = strB;
+			m_userArr1[m_file_num1-1] = strC;
+			m_fingerArr1[m_file_num1-1] = strD;
+			m_numArr1[m_file_num1 - 1] = strE;
+			m_conditionArr1[m_file_num1-1] = strF;
+
 
 	}
 	}
@@ -574,15 +667,15 @@ void CPractice_biominiDlg::OnBnClickedselectfile1()
 
 void CPractice_biominiDlg::OnBnClickedselectfile2()
 {
-	//file dialog ´ÙÁß ¼¿·º
-	// ´ÙÁß ¼¿·º -> ¹è¿­¿¡ ÆÄÀÏ ¾²±â
+	//file dialog ë‹¤ì¤‘ ì…€ë ‰
+	// ë‹¤ì¤‘ ì…€ë ‰ -> ë°°ì—´ì— íŒŒì¼ ì“°ê¸°
 
 	HUFExtractor hExtractor = NULL;
 	HUFMatcher hMatcher = NULL;
 	UFE_STATUS ufe_res;
 	ufe_res = UFE_Create(&hExtractor);
-	CString tpath = _T("C:\\Users\\User\\Documents\\Visual Studio 2015\\Projects\\2\\*.bin");
-	CString tpath2 = _T("C:\\Users\\User\\Documents\\Visual Studio 2015\\Projects\\2");
+	CString tpath = _T("C:\\1Copy\\*.bin");
+	CString tpath2 = _T("C:\\1Copy");
 	CFileFind finder;
 	BOOL bWorking = finder.FindFile(tpath);
 	CString csTemp;
@@ -607,21 +700,25 @@ void CPractice_biominiDlg::OnBnClickedselectfile2()
 			csTemp = tpath2 + _fileName;
 		}
 		m_selectArr2[m_file_num2 - 1] = _fileName;
-		CString str = _fileName; //ÆÄ½ÌÇÒ ¹®ÀÚ¿­
-		CString strA, strB, strC, strD; //ÆÄ½ÌµÇ´Â ¹®ÀÚ¿­À» ´ãÀ» º¯¼ö¼±¾ğ
+		CString str = _fileName; //íŒŒì‹±í•  ë¬¸ìì—´
+		CString strA, strB, strC, strD, strE, strF,strG; //íŒŒì‹±ë˜ëŠ” ë¬¸ìì—´ì„ ë‹´ì„ ë³€ìˆ˜ì„ ì–¸
 		AfxExtractSubString(strA, str, 0, '_');
 		AfxExtractSubString(strB, str, 1, '_');
 		AfxExtractSubString(strC, str, 2, '_');
 		AfxExtractSubString(strD, str, 3, '_');
+		AfxExtractSubString(strE, str, 4, '_');
+		AfxExtractSubString(strF, str, 5, '_');
+		AfxExtractSubString(strG, str, 6, '.');
 		m_yearArr2[m_file_num2 - 1] = strA;
-		m_userArr2[m_file_num2 - 1] = strB;
-		m_fingerArr2[m_file_num2 - 1] = strC;
-		m_conditionArr2[m_file_num2 - 1] = strD;
+		m_deviceArr2[m_file_num2 - 1] = strB;
+		m_userArr2[m_file_num2 - 1] = strC;
+		m_fingerArr2[m_file_num2 - 1] = strD;
+		m_numArr2[m_file_num2 - 1] = strE;
+		m_conditionArr2[m_file_num2 - 1] = strF;
+		
 
 	}
 }
-
-
 
 
 
@@ -751,3 +848,4 @@ void CPractice_biominiDlg::OnBnClickedselection()
 		}
 	}
 }
+
